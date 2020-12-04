@@ -1,0 +1,5 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <h4>{{ user.get_full_name }} {{ user.last_name }}</h4>
+    <span>{{ user.username }}</span>
+{% endblock %}

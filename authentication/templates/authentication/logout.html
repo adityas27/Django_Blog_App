@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <div>
+        <div class="jumbotron">
+            <h1 class="display-4">Your account has been logged out</h1>
+            <p class="lead">Thank you for using our web app!</p>
+            <hr class="my-4">
+
+            <a class="btn btn-primary btn-lg" href="{% url 'login'%}" role="button">Log in Again</a>
+        </div>
+    </div>
+{% endblock %}
