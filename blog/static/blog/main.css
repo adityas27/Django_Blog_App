@@ -1,6 +1,6 @@
 .body_back{
-  height: 900px;
   background-color: #eeeded;
+  min-height: 700px;
 }
 .content-section {
   background: #ffffff;
@@ -8,4 +8,10 @@
   border: 1px solid #dddddd;
   border-radius: 3px;
   margin-bottom: 20px;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }

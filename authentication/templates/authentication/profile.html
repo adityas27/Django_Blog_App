@@ -1,5 +1,61 @@
 {% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
-    <h4>{{ user.get_full_name }} {{ user.last_name }}</h4>
-    <span>{{ user.username }}</span>
-{% endblock %}
+<div class="columns">
+    <div class="box column">
+        <article class="columns">
+            <div class="column">
+                <figure class="image is-128x128 ">
+                    <img class='is-rounded center' src="{{ user.profile.image.url }}" alt="Image">
+                </figure>
+            </div>
+            <div class="column is-10">
+                <div class="content">
+                    <p>
+                        <span class="title is-4">{{ user.first_name }} {{ user.last_name }}</span>
+                        <strong>@{{ user.username }}</strong>
+                        <br>
+                        <span>{{ user.email }}</span>
+                        <hr>
+                        <span class="title is-5 text-muted">About User: </span>
+                        <span class="title is-5">{{ user.profile.bio }}</span>
+                        <hr>
+                        <span class="title is-5 text-muted">Location: </span>
+                        <span class="title is-4">{{ user.profile.location }}</span>
+                    </p>
+                </div>
+
+            </div>
+        </article>
+    </div>
+
+</div>
+<div style="margin: 20px;" class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseOne">
+                Update Account
+            </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+            data-parent="#accordionExample">
+            <div class="accordion-body">
+                <div class="">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4">Update</legend>
+                            {{ u_form|crispy }}
+                            {{ p_form|crispy }}
+                        </fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    {% endblock %}

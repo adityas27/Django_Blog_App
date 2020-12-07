@@ -1,0 +1,28 @@
+{% extends 'blog/base.html' %}
+{% block content%}
+<div style='margin-bottom: 30px;' class="box">
+    <article class="media">
+        <div class="media-left">
+            <figure class="image is-64x64">
+                <img class='is-rounded' src="{{ post.author.profile.image.url}}" alt="Image">
+            </figure>
+        </div>
+        <div class="media-content">
+            <div class="content">
+                <h4><a href="#">{{ post.author }}</a> on {{ post.date_posted | date:"b d Y D, f A T" | capfirst }}</h4>
+                <hr>
+                <h3 class="card-title">{{ post.title | upper }}</h3>
+                <p>{{ post.content }}</p>
+                <p class="card-text"><small class="text-muted"></small>
+            </div>
+            <div class="">
+                {% if post.author == user %}
+                <a class="btn btn-outline-info" href="{% url 'blog_update' post.id %}">Update</a>
+                <a class="btn btn-outline-danger" href="{% url 'blog_delete' post.id %}">Delete</a>
+                {% endif %}
+            </div>
+        </div>
+    </article>
+</div>
+
+{% endblock %}

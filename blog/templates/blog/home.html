@@ -5,20 +5,47 @@
     <article class="media">
         <div class="media-left">
             <figure class="image is-64x64">
-                <img class='is-rounded'src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                <img class='is-rounded' src="{{ post.author.profile.image.url}}" alt="Image">
             </figure>
         </div>
-       
+
         <div class="media-content">
             <div class="content">
-                <h4><a href="#">{{ post.author }}</a> on {{ post.date_posted | date:"b d Y D, f A T" | capfirst }}</h4>
+                <h4><a href="">{{ post.author }}</a> on {{ post.date_posted | date:"b d Y D, f A T" | capfirst }}</h4>
                 <hr>
-                <h3 class="card-title">{{ post.title | upper }}</h3>
+                <a href="{% url 'blog_detail' post.id%}">
+                    <h3 class="card-title">{{ post.title | upper }}</h3>
+                </a>
                 <p>{{ post.content }}</p>
                 <p class="card-text"><small class="text-muted"></small>
+                    <a href="{% url 'blog_detail' post.id %}"><button class="btn btn-outline-secondary">Read Full
+                            Post</button></a>
             </div>
         </div>
     </article>
 </div>
 {% endfor %}
+<div align='center'style='width: 100%; overflow-x: scroll;'class="container">
+    {% if is_paginated %}
+
+    {% if page_obj.has_previous %}
+      <a class="btn btn-outline-info mb-4" href="?page=1"><<</a>
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}"><</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">></a>
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">>></a>
+    {% endif %}
+
+  {% endif %}
+</div>
 {% endblock %}
