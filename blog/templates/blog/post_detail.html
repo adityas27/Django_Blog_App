@@ -9,7 +9,7 @@
         </div>
         <div class="media-content">
             <div class="content">
-                <h4><a href="#">{{ post.author }}</a> on {{ post.date_posted | date:"b d Y D, f A T" | capfirst }}</h4>
+                <h4><a href="{% url 'user_post' post.author%}">{{ post.author }}</a> on {{ post.date_posted | date:"b d Y D, f A T" | capfirst }}</h4>
                 <hr>
                 <h3 class="card-title">{{ post.title | upper }}</h3>
                 <p>{{ post.content }}</p>
